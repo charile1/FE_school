@@ -1,0 +1,200 @@
+@charset "utf-8";
+/* base */
+@font-face {
+    font-family: Spoqa Han Sans Neo;
+    src: url("../font/SpoqaHanSansNeo-Regular.woff") format("woff");
+    font-weight: 400;
+}
+@font-face {
+    font-family: Spoqa Han Sans Neo;
+    src: url("../font/SpoqaHanSansNeo-Medium.woff") format("woff");
+    font-weight: 500;
+}
+@font-face {
+    font-family: Spoqa Han Sans Neo;
+    src: url("../font/SpoqaHanSansNeo-Bold.woff") format("woff");
+    font-weight: 700;
+}
+body {
+    font-family: SpoqaHanSansNeo, sans-serif;
+}
+
+#appLogin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+}
+
+.cont-login{
+    width: 440px;
+    height: 172px;
+    padding:38px 30px 30px;
+    border: 1px solid #C4C4C4;
+    border-radius: 5px;
+    text-align: center;
+}
+.cont-login .tit-weniv img{
+    width:122px;
+}
+.cont-login .txt-login{
+    margin:32px 0 36px;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+/* 모달 스타일 */
+.modal-login{
+    display: none;
+    height: 100%;
+}
+
+.modal-login.on{
+    display: block;
+}
+
+/* 전체화면에 쫙 스트레치 될수있도록  */
+.modal-login::after{
+    display: block;
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: .7;
+    z-index: 10;
+}
+/* margin말고 translate를 써서 높이에 따라 반만큼 오게한다.  */
+.modal-login .cont-form-login {
+    width: 100%;
+    max-width: 520px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    z-index: 20;
+    border: 1px solid #c4c4c4;
+    border-radius: 10px;
+}
+.cont-form-login .tit-form {
+    font-weight: 500;
+    line-height: 20px;
+    font-size: 16px;
+    padding: 20px 0 16px;
+    text-align: center;
+    border-bottom: 1px solid #C4C4C4;
+}
+.cont-form-login .txt-form {
+    font-weight: 500;
+    line-height: 24px;
+    font-size: 20px;
+    margin: 26px 0 24px;
+    padding-left: 24px;
+}
+/* 전체 폼에 패딩을 준다. 회원가입,아이디찾기 가운데로 보내주기 */
+.cont-form-login .form-login{
+    padding: 0 24px 0;
+    text-align: center;
+}
+/* 에러메세지 왼쪽으로 다시 옮겨주기 */
+.form-login .inp-error {
+    text-align: left;
+}
+/* 로그인 상태유지 메세지 왼쪽으로 옮겨주기 */
+.form-login .labl-hold{
+    display: block;
+    text-align: left;
+    margin: 17px 0 21px;
+    user-select: none;
+}
+/* 로그인 상태유지 체크박스 가상요소로 만들어주기  */
+.form-login .labl-hold::before{
+    display: inline-block;
+    content: '';
+    width: 22px;
+    height: 22px;
+    margin-right: 8px;
+    background-image: url(../images-login/icon_check_empty.png);
+    vertical-align: -5px;
+    cursor: pointer;
+}
+/* 접근성 */
+/* 포커싱했을때 , 가상요소에 박스처리를 하기위해서. border와 outline의 차이는 볼더는 다른요소를 밀어내고 아웃라인은 밀어내지 않는다.*/
+.form-login .inp-hold:focus+.labl-hold::before{
+    outline: 2px solid #2F80ED;;
+    /* outline-offset: 3px; */
+    border-radius: 50%;
+}
+
+/* 체크박스를 checked 했을때 , 형제요소인 곳의 체크박스를 파란 체크박스로 바꾸는 것. */
+.form-login .inp-hold:checked+.labl-hold::before{
+    background-image: url(../images-login/icon_check.png);
+}
+
+/* link로 시작하는 클래스에 디자인 ,a 태그는 인라인이므로 인라인블록처리*/
+.form-login a[class^="link"]{
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #767676;
+    line-height: 18px;
+    text-decoration: none;
+}
+/* 사이에 '|' 가상요소로 만들어주기 */
+.form-login .link-signup::after{
+    display: inline-block;
+    content: "\007C";
+    margin: 0 8px 0 12px;
+}
+/* 닫기버튼을 포지션으로 이동해주지 않고 패딩값을 넣어줘서 그 근처에만 가도 클릭이 될 수 있도록 하였다.
+    박스사이징은 패딩값을 주기위해서 넣어줌. 배경은 투명색 */
+.btn-close {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    box-sizing: content-box;
+    padding:22px 24px ;
+    background-color: transparent;
+}
+
+/* sns 전체 장 간격잡고, 포지션 랠러티브는 비포요소인 '또는'의 위치를 잡기위해*/
+.cont-form-login .cont-sns-login{
+    position:relative;
+    margin-top:30px;
+    padding:30px 24px 25px;
+}
+
+/* 비포요소로 '또는' 만들기 */
+.cont-sns-login::before{
+    content:'또는';
+    display: block;
+    width:52px;
+    height:18px;
+    position: absolute;
+    top:0;
+    left:50%;
+    transform:translateX(-50%);
+    text-align: center;
+    background-color: #fff;
+    z-index: 10;
+    color: #767676;
+}
+/* '또는' 옆에 라인 가상요소로 만들기
+    sns 전체의 패딩 좌우가 24px이였으므로 전체에서 24*2인 48px을 빼준다. */
+.cont-sns-login::after{
+    content: '';
+    display: block;
+    width: calc(100% - 48px);
+    position: absolute;
+    top: 9px;
+    height: 1px;
+    background: #C4C4C4;
+}
+/* '~계정으로 로그인'들 간격잡아주기 
+    +로 해줘야 처음 요소 제외하고 적용이 된다.  */
+.cont-sns-login .list-sns li+li {
+    margin-top: 10px;
+}
